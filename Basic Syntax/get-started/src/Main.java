@@ -1,6 +1,6 @@
 /* Autor: Ricardo Marthus Gremmelmaier, Data: 22/7/2025
  * Programa realizado para resolver as atividades do Bootcamp GFT 7 da DIO.
- * Exercício 1: Escreva um código que recebe o nome e idade de alguem e imprima na tela
+ * Exercício 1: Escreva um código que recebe o nome e o ano de nascimento de alguem e imprima na tela
  * "Olá, pessoa, você tem idade anos."
  * Exercício 2: Escreva um código que receba o tamanho do lado de um quadrado e calcula a área do quadrado.
  * Exercício 3: Escreva um código que recebe a base e a altura de um triângulo e calcula a área do retângulo.
@@ -8,6 +8,7 @@
  * 
  */
 
+import java.time.OffsetDateTime;
 import java.util.Scanner;
 
 public class Main {
@@ -16,8 +17,10 @@ public class Main {
         var scanner = new Scanner(System.in);
         System.out.println("Digite o seu nome:");
         String nome = scanner.next();
-        System.out.println("Digite sua idade:");
-        int idade = scanner.nextInt();
+        System.out.println("Digite seu ano de nascimento:");
+        int anoNascimento = scanner.nextInt();
+        int anoAtual = OffsetDateTime.now().getYear();
+        int idade = anoAtual - anoNascimento;
         scanner.nextLine();
         System.out.println("Olá " + nome + ", você tem " + idade + " anos.");
 
