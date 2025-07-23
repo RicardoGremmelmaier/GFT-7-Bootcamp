@@ -82,3 +82,41 @@ switch(option){
 }
 ```
 
+## Estrutura de repetição for
+
+Os laços de repetição são utilizados para repetir um certo bloco de código por uma determinada quantidade de vezes. Eles são úteis para evitar repetições de código e melhoram a legibilidade.
+
+```java
+int somatório = 0;
+for(int i = 1; i <= 10; i++){
+    somatório += i; //Somatória de 1 a 10 
+}
+```
+
+## Estrutura de repetição while
+
+Possui uma grande semelhança com o for, porém seus argumentos passados são diferentes. Para o while, o argumento tem que ser um booleano e que irá sair do laço quando essa condição se tornar falsa.
+
+```java
+int flag = 1;
+
+while (flag){
+    //Bloco de código
+    if (somethingHappened) flag = 0; //Saída do while
+}
+```
+
+É possível também utilizar o **do while**. A diferença entre eles é que o do while sempre realiza a primeira iteração, enquanto o **while** faz a verificação antes de realizar a iteração
+
+```java
+int flag = 0;
+
+while (flag){
+    //Bloco de código não realizado
+}
+
+do {
+    //Bloco de código realizado uma vez ao menos
+} while (flag)
+```
+
