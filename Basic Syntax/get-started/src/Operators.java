@@ -11,7 +11,7 @@
 import java.time.OffsetDateTime;
 import java.util.Scanner;
 
-public class Main {
+public class Operators {
     public static void main(String[] args){
         //Exercício 1
         var scanner = new Scanner(System.in);
