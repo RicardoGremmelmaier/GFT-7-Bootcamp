@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args){
         var scanner = new Scanner(System.in);
-        var option = -1;
+        var bankOption = -1;
 
         System.out.print("Enter initial balance: ");
         double initialBalance = scanner.nextDouble();
@@ -20,9 +20,9 @@ public class Main {
             System.out.println("5. Check if using special check");
             System.out.println("0. Exit");
             System.out.print("Choose an option: ");
-            option = scanner.nextInt();
+            bankOption = scanner.nextInt();
 
-            switch (option) {
+            switch (bankOption) {
                 case 1:
                     System.out.print("Enter deposit amount: ");
                     double depositAmount = scanner.nextDouble();
@@ -68,8 +68,65 @@ public class Main {
 
             System.out.println("====================================");
 
-        } while (option != 0);
-        scanner.close();
+        } while (bankOption != 0);
         System.out.println("Thank you for using the bank system!");
+
+        Car car = new Car();
+        System.out.println("Car created with initial speed: " + car.getSpeed() + " and gear: " + car.getGear());
+        var carOption = -1;
+        do {
+            System.out.println("====================================");
+            System.out.println("1. Start car");
+            System.out.println("2. Stop car");
+            System.out.println("3. Accelerate car");
+            System.out.println("4. Brake car");
+            System.out.println("5. Check speed and gear");
+            System.out.println("6. Turn left");
+            System.out.println("7. Turn right");
+            System.out.println("0. Exit");
+            System.out.print("Choose an option: ");
+            carOption = scanner.nextInt();
+
+            switch (carOption) {
+                case 1:
+                    car.start();
+                    break;
+
+                case 2:
+                    car.stop();
+                    break;
+
+                case 3:
+                    car.accelerate();
+                    break;
+
+                case 4:
+                    car.brake();
+                    break;
+
+                case 5:
+                    System.out.println("Current speed: " + car.getSpeed() + ", Current gear: " + car.getGear() + ", Is running: " + car.isRunning());
+                    break;
+
+                case 6:
+                    car.turnLeft();
+                    break;
+                
+                case 7:
+                    car.turnRight();
+                    break;
+    
+                case 0:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid option, please try again.");
+            }
+
+            System.out.println("====================================");
+
+        } while (carOption != 0);
+
+        scanner.close();
     }
 }
