@@ -9,6 +9,7 @@ public class Main {
         System.out.print("Enter initial balance: ");
         double initialBalance = scanner.nextDouble();
         BankAccount account = new BankAccount(initialBalance);
+        BankSlip bankSlip = new BankSlip(100.0);
         System.out.println("Bank account created with balance: " + account.getBalance() + " and special check: " + account.getSpecialCheck());
         
         do {
@@ -30,9 +31,7 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.print("Enter payment amount: ");
-                    double paymentAmount = scanner.nextDouble();
-                    account.payment(paymentAmount);
+                    account.payment(bankSlip);
                     break;
 
                 case 3:

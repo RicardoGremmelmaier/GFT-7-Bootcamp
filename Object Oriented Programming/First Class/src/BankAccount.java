@@ -54,22 +54,21 @@ public class BankAccount {
         balance += amount;
     }
 
-    public void payment(double amount) {
-        if (amount <= 0) {
-            System.out.println("Payment amount must be positive.");
-            return;
-        }
-        if (amount > balance + specialCheck) {
+    public void payment(BankSlip bankSlip) {
+        if (bankSlip.getAmountToPay() > balance + specialCheck) {
             System.out.println("Insufficient funds.");
             return;
         }
-        if (amount > balance) {
-            specialCheckToPay += (amount - balance);
+        if (bankSlip.getAmountToPay() > balance) {
+            specialCheckToPay += (bankSlip.getAmountToPay() - balance);
             this.updateSpecialCheck();
+            bankSlip.pay(specialCheckToPay + balance);
             balance = 0;
+            System.out.println("Payment made using special check. Remaining balance: " + balance + ", Special check to pay: " + specialCheckToPay);
             return;
         }
-        balance -= amount;
+        balance -= bankSlip.getAmountToPay();
+        System.out.println("Payment made. Remaining balance: " + balance);
     }
 
     public void withdraw(double amount) {
