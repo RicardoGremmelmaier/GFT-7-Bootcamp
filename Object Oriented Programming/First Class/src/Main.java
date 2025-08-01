@@ -125,6 +125,73 @@ public class Main {
             System.out.println("====================================");
 
         } while (carOption != 0);
+        System.out.println("Thank you for using the car system!");
+        System.out.println("====================================");
+
+
+        PetWash petWash = new PetWash();
+        Pet pet = new Pet();
+        System.out.println("Pet wash created with initial water level: " + petWash.getWaterLevel() + " and soap level: " + petWash.getSoapLevel());
+        var washOption = -1;
+        do {
+            System.out.println("====================================");
+            System.out.println("1. Add water");
+            System.out.println("2. Check water level");
+            System.out.println("3. Add soap");
+            System.out.println("4. Check soap level");
+            System.out.println("5. Put pet in wash");
+            System.out.println("6. Remove pet from wash");
+            System.out.println("7. Wash pet");
+            System.out.println("8. Clean machine");
+            System.out.println("0. Exit");
+            System.out.print("Choose an option: ");
+            washOption = scanner.nextInt();
+
+            switch (washOption) {
+                case 1:
+                    petWash.addWater();
+                    break;
+
+                case 2:
+                    petWash.getWaterLevel();
+                    break;
+
+                case 3:
+                    petWash.addSoap();
+                    break;
+
+                case 4:
+                    petWash.getSoapLevel();
+                    break;
+
+                case 5:
+                    petWash.putPet(pet);
+                    break;
+
+                case 6:
+                    petWash.removePet(pet);
+                    break;
+
+                case 7:
+                    petWash.washPet(pet);
+                    break;
+
+                case 8:
+                    petWash.cleanMachine();
+                    break;
+
+                case 0:
+                    System.out.println("Exiting...");
+                    break;
+
+                default:
+                    System.out.println("Invalid option, please try again.");
+            }
+
+            System.out.println("====================================");
+
+        } while (washOption != 0);
+        System.out.println("Thank you for using the pet wash system!");
 
         scanner.close();
     }
