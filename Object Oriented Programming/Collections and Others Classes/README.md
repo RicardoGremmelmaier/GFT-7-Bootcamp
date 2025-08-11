@@ -314,3 +314,115 @@ public class Main{
     }
 }
 ```
+
+## LocalDate, LocalDateTime, LocalTime, OffsetDateTime, OffsetTime
+
+São as maneiras mais atuais de trabalhar com datas e por isso mais utilizadas.
+
+* O LocalDate permite fazer adições de datas, formatação de datas, entre outros. Alguns métodos são o **plus, plusYears, plusDays, minus, minusMonths**, além de métodos como **get, getMonth, getMonthValue, getYear**, etc. Também é possível comparações, como por exemplo **isBefore, isEqual**, entre outros. O isEqual permite que vc faça comparações com datas entre outros calendários, como por exemplo o calendário Budista, ou o calendário Japonês.
+
+```java
+import java.time.format.DateTimeFormatter;
+
+public class Main{
+    public static void main(String[] args){
+
+       LocalDate localDate = LocalDate.now();
+       var strDate = "11/08/2025";
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       System.out.println(formatter.format(LocalDate.parse(strDate, formatter))); 
+    }
+}
+```
+
+* O LocalTime serve mais para obtenção de horas, minutos, segundos e milisegundos. Ele também permite formatações e diversos métodos.
+
+```java
+import java.time.format.DateTimeFormatter;
+
+public class Main{
+    public static void main(String[] args){
+
+       LocalTime localTime = LocalTime.now();
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+       System.out.println(formatter.format(localTime)); 
+    }
+}
+```
+
+* LocalDateTime é a mistura de ambos, possuindo tanto a data quanto o tempo, e de maneira similar, ele suporta formatações e diversos métodos. Do mesmo modo que podemos transformar o localTime e o localDate em localDateTime, é possível fazer o passo reverso.
+
+```java
+import java.time.format.DateTimeFormatter;
+
+public class Main{
+    public static void main(String[] args){
+
+        LocalTime localTime = LocalTime.now();
+        LocalDateTime localDateTime = LocalDate.atTime(localTime);
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        System.out.println(formatter.format(localDateTime)); 
+    }
+}
+```
+
+* A classe OffsetDateTime possui algumas diferenças comparando a LocalDateTime, já que a LocalDateTime não possui a TimeZone, enquanto a offsetTime possui a TimeZone.
+
+```java
+import java.time.format.DateTimeFormatter;
+
+public class Main{
+    public static void main(String[] args){
+
+        OffsetDateTime offsetDateTime = OffsetDateTime.now();
+        System.out.println(offsetDateTime); //imprime com a TimeZone (-3) 
+    }
+}
+```
+
+## Thread e Interface Runnable
+
+Para trabalhar com multithreads em java, precisamos utilizar a classe Thread e a interface Runnable
+
+```java
+public class Main{
+
+    private static List<Integer> numbers = new ArrayList<>();
+
+    //O Bloco pode ser sincronizado, ou o método pode ser sincronizado
+    private static void inc(int number){ //Estruturas de controle para evitar condições de disputa
+        synchronized (numbers){
+            numbers.add(number);
+        }
+    }
+
+    private synchronized static void show(){
+            System.out.println(numbers);
+    }
+
+    public static void main(String[] args){
+
+        Runnable inc = () -> {
+            for (int i = 0; i < 100000; i++){
+                inc(i);
+            }
+        };
+
+        Runnable dec = () -> {
+            for (int i = 100000; i > 0; i--){
+                inc(i);
+            }
+        };
+
+        Runnable show = () -> {
+            for (int i = 0; i < 250000; i++){
+                show();
+            }
+        };
+
+        new Thread(inc).start();
+        new Thread(dec).start();
+        new Thread(show).start();
+    }
+}
+```
