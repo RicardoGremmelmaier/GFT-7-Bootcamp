@@ -20,9 +20,12 @@ repositories {
 
 dependencies {
     implementation("org.mapstruct:mapstruct:$mapstructVersion")
+    implementation("org.projectlombok:lombok-mapstruct-binding:$lombokMapstructBinding")
+    
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+    
     annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
-    implementation("org.projectlombok:lombok:$lombokVersion")
-    annotationProcessor("org.projectlombok:lombok-compiler:$lombokVersion")
-    implementation("org.mapstruct.extensions.lombok:mapstruct-lombok:$lomboMapstructBinding")
+    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:$lombokMapstructBinding")
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
 }
 
