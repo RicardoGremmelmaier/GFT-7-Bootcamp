@@ -1,4 +1,5 @@
-import br.com.palavras.*;
+import br.com.palavras.ConjuntoPalavrasUnicas;
+import br.com.tarefas.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
