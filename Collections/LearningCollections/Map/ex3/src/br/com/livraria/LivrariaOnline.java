@@ -1,7 +1,6 @@
 package br.com.livraria;
 
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.HashMap;
 
 public class LivrariaOnline {
