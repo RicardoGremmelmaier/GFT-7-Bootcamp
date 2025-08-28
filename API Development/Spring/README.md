@@ -62,4 +62,78 @@
         * `openfeign`: client HTTP baseado em interfaces
         * `actuator`: gerenciamento de monitoramento da aplicação
 
-###
+### Beans x Components
+
+* Quando usar @Bean?
+
+    * Quando não é nada da sua aplicação e não tem acesso a inicializar o arquivo (como de bibliotecas externas).
+
+* Quando usar @Component?
+
+    * Quando são componentes que tenho acesso no código fonte, serão escaneados na aplicação.
+
+### Values
+
+É possível definir valores no application.properties para associar a algumas variáveis.
+
+```java
+@Component
+public class SistemaMensagem implements CommandLineRunner {
+    @Value("${name:NoReply}") // Caso nao ache o value name, coloca o default
+    private String nome; // Pega o valor de @Value
+    @Value("{email}")
+    private String email;
+}
+```
+
+### Configuration properties
+
+É um bean de configuração que todos os seus valores de configuração vem do `configuration.properties`. É possível utilizá-lo através do `@Configuration` e do `@ConfigurationProperties(prefix = "remetente")` e adicionar esse prefixo no application.properties nos valores desejados.
+
+### Java Persistence API - JPA
+
+* O que é ORM?
+
+    * Object-Relational Mapping é um recurso para aproximar o paradigma da orientação ao objetos ao contexto de banco de dados relacional.
+    * É realizado através do mapeamento de objeto para uma tabela por uma biblioteca ou framework.
+
+* Java Persistence API
+
+    * Especificação baseada em interfaces, que através de um framework realiza operações de persistência de objetos em Java.
+    * **Hibernate, Eclipse Link, Top Link, Open JPA** são algumas implementações
+
+* Mapeamentos
+
+    * Possuem alguns aspectos, tais quais: **identificação, definição, relacionamento, herança, persistência**.
+
+```java
+@Entity
+@Table(name="usuario")
+public class Usuario{
+    @Id
+    @GenerateValue(strategy=generationType.AUTO)
+    @Column(name="id_usuario")
+    private Long id;
+
+    private String nome;
+
+    @Column(name="login_usuario")
+    private String login;
+
+    @Column(name="senha_usuario")
+    private String senha;
+}
+```
+
+* EntityManager
+
+![alt text](/API%20Development/Spring/imgs/image-3.png)
+
+### Spring Data JPA
+
+É um novo recurso disponibilizado pelo Spring Framework que adiciona uma camada sobre o JPA, usando todos os recursos definidos pela JPA, especialmente os mapeamentos de entidade e os recursos de persistência baseado em interfaces e anotações. Ele adiciona então seus próprios recursos, como uma implementação no code do padrão de repositórrio e a criação de consultas de bancos de dados a partir de nomes e métodos.
+
+A interação com o banco de dados será através de herança de interfaces e declaração de métodos com anotações.
+
+* Interfaces: **CrudRepository, JPARepository, PagingAndSortingRepository**
+* Anotações: **@Query, @Param**
