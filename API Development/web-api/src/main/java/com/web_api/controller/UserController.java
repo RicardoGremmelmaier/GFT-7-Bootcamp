@@ -20,7 +20,7 @@ public class UserController {
 
     @GetMapping("/{username}")
     public User getUser(@PathVariable("username") String username){
-        return repository.findByName(username);
+        return repository.findByUsername(username);
     }
 
     @DeleteMapping("/delete/{id}")
