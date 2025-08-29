@@ -2,12 +2,14 @@ package com.web_api.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
@@ -20,15 +22,19 @@ public class WebSecurityConfig {
         auth.userDetailsService(sds).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 
-    // To-Do this doesnt work in new spring security versions, need to understand how to
-    // make this work
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .requestMatchers("/").permitAll()
-                .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                .requestMatchers("/managers").hasAnyRole("MANAGER")
-                .requestMatchers("users").hasAnyRole("MANAGER", "USER")
-                .anyRequest().authenticated().and().httpBasic();
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers("/managers").hasRole("MANAGER")
+                        .requestMatchers("/users").hasAnyRole("MANAGER", "USER")
+                        .anyRequest().authenticated()
+                )
+                .httpBasic();
+
+        return http.build();
     }
     // In memory
 //    @Bean
