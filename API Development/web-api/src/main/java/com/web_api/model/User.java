@@ -1,5 +1,6 @@
 package com.web_api.model;
 
+
 public class User {
     private Integer id;
     private String login;
