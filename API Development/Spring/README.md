@@ -6,7 +6,7 @@
     * É composto por módulos afim de `reduzir a complexidade` no desenvolvimento
     * Alguns desses módulos são: 
 
-    ![alt text](image.png)
+    ![alt text](imgs/image.png)
 
 * Spring x Java EE
 
@@ -16,13 +16,13 @@
 
     * Trata-se do redirecionamento do fluxo de execução de um código retirando parcialmente o controle sobre ele e delegando-o para um container -> `minimizar o acoplamento do código`
 
-    ![alt text](image-1.png)
+    ![alt text](imgs/image-1.png)
 
 * Injeção de dependências
 
     * Padrão de desenvolvimento com a finalidade de manter baixo o nível de acoplamento entre módulos de um sistema.
 
-    ![alt text](image-2.png)
+    ![alt text](imgs/image-2.png)
 
 * Beans / AutoWired / Scopes
 
